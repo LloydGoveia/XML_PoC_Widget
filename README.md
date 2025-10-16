@@ -37,3 +37,9 @@ It demonstrates how XML payloads can be constructed and sent to the **Live Activ
    - **Folder:** `/ (root)`
 3. Click **Save**.
 4. After a few minutes, your widget will be available at: https://<your-username>.github.io/XML-PoC-Widget/
+
+Refer to https://community.sap.com/t5/crm-and-cx-blogs-by-sap/how-can-you-simplify-sap-service-cloud-cti-integration-testing-try-this/ba-p/13974039 for more details.
+
+*** IMPORTANT ***
+This project is provided AS IS, for educational and proof-of-concept purposes only.
+No warranty or official support is provided.
