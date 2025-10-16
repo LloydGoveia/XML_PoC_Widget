@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Cloud Widget POC</title>
+    <meta name="author" content="Lloyd Goveia">
+    <meta name="description" content="Service Cloud Widget POC created by Lloyd Goveia. Provided AS IS with no support.">
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+<!-- Main Form for the Service Cloud Widget POC -->
+<form id="callForm" onsubmit="handleSendCall(event)">
+    <h1>Service Cloud Widget POC</h1>
+    <table>
+        <!-- Interaction Type Dropdown -->
+        <tr>
+            <td><label for="type">Type:</label></td>
+            <td>
+                <select id="type" name="type" required>
+                    <option value="CALL">CALL</option>
+                    <option value="CHAT">CHAT</option>
+                    <option value="MESSAGE">MESSAGE</option>
+                    <!-- Email and Notification types are currently commented out -->
+                    <!-- <option value="EMAIL">EMAIL</option> -->
+                    <!-- <option value="NOTIFICATION">NOTIFICATION</option> -->
+                </select>
+            </td>
+        </tr>
+
+        <!-- Event Type Dropdown (Includes Transfer) -->
+        <tr>
+            <td><label for="eventType">Event Type:</label></td>
+            <td>
+                <select id="eventType" name="eventType" required>
+                    <option value="INBOUND">INBOUND</option>
+                    <option value="OUTBOUND">OUTBOUND</option>
+                    <option value="UPDATEACTIVITY">UPDATEACTIVITY</option>
+                    <option value="TRANSFER">TRANSFER</option> <!-- New Event Type -->
+                </select>
+            </td>
+        </tr>
+
+        <!-- Action Dropdown -->
+        <tr>
+            <td><label for="action">Action:</label></td>
+            <td>
+                <select id="action" name="action" required>
+                    <option value="NOTIFY">NOTIFY</option>
+                    <option value="ACCEPT">ACCEPT</option>
+                    <option value="END">END</option>
+                </select>
+            </td>
+        </tr>
+
+        <!-- ANI (Phone Number) Field -->
+        <tr>
+            <td><label for="ani">ANI (Phone Number):</label></td>
+            <td><input id="ani" name="ani" type="text" placeholder="+1234567890" value="+14165551234"></td>
+        </tr>
+
+        <!-- Email Field -->
+        <tr>
+            <td><label for="email">Email:</label></td>
+            <td><input id="email" name="email" type="email" placeholder="example@test.com"></td>
+        </tr>
+
+        <!-- Subject Field -->
+        <tr>
+            <td><label for="subject">Subject:</label></td>
+            <td><input id="subject" name="subject" type="text" placeholder="Enter subject"></td>
+        </tr>
+
+        <!-- Text Field -->
+        <tr>
+            <td><label for="text">Text:</label></td>
+            <td><textarea id="text" name="text" placeholder="Enter text"></textarea></td>
+        </tr>
+
+        <!-- Transcript Field (Visible for CHAT Type Only) -->
+        <tr id="transcriptRow" style="display: none;">
+            <td><label for="transcript">Transcript:</label></td>
+            <td><textarea id="transcript" name="transcript" placeholder="Enter chat transcript"></textarea></td>
+        </tr>
+
+        <!-- External Reference ID Field -->
+        <tr>
+            <td><label for="externalReferenceID">External Reference ID:</label></td>
+            <td>
+                <input id="externalReferenceID" name="externalReferenceID" type="text">
+                <button type="button" onclick="generateRandomGUID('externalReferenceID')">Generate Random GUID</button>
+                <input id="copyToRecordingId" type="checkbox"> Copy to Call Recording
+            </td>
+        </tr>
+
+        <!-- Call Recording Field -->
+        <tr>
+            <td><label for="recordingId">Call Recording:</label></td>
+            <td><input id="recordingId" name="recordingId" type="text"></td>
+        </tr>
+
+        <!-- External Original Reference ID Field -->
+        <tr>
+            <td><label for="externalOriginalReferenceID">External Original Reference ID:</label></td>
+            <td>
+                <input id="externalOriginalReferenceID" name="externalOriginalReferenceID" type="text">
+                <button type="button" onclick="generateRandomGUID('externalOriginalReferenceID')">Generate Random GUID</button>
+            </td>
+        </tr>
+
+        <!-- Custom Fields -->
+        <tr>
+            <td><label for="custom1">Custom Field 1:</label></td>
+            <td><input id="custom1" name="custom1" type="text"></td>
+        </tr>
+        <tr>
+            <td><label for="custom2">Custom Field 2:</label></td>
+            <td><input id="custom2" name="custom2" type="text"></td>
+        </tr>
+        <tr>
+            <td><label for="custom3">Custom Field 3:</label></td>
+            <td><input id="custom3" name="custom3" type="text"></td>
+        </tr>
+        <tr>
+            <td><label for="custom4">Custom Field 4:</label></td>
+            <td><input id="custom4" name="custom4" type="text"></td>
+        </tr>
+
+        <!-- Submit and Reset Buttons -->
+        <tr>
+            <td colspan="2">
+                <button type="submit">Post Payload to Parent Window</button>
+                <button type="button" onclick="resetForm()">Reset Form</button>
+            </td>
+        </tr>
+    </table>
+    <div class="payload-message" id="payloadMessage"></div>
+</form>
+
+<!-- Script to Show/Hide Transcript Field Based on Type -->
+<script>
+    document.getElementById("type").addEventListener("change", function () {
+        document.getElementById("transcriptRow").style.display = this.value === "CHAT" ? "table-row" : "none";
+    });
+</script>
+</body>
+</html>
