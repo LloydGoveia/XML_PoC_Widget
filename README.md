@@ -36,4 +36,4 @@ It demonstrates how XML payloads can be constructed and sent to the **Live Activ
    - **Branch:** `main`  
    - **Folder:** `/ (root)`
 3. Click **Save**.
-4. After a few minutes, your widget will be available at:
+4. After a few minutes, your widget will be available at: https://<your-username>.github.io/XML-PoC-Widget/
